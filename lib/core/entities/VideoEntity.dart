@@ -8,6 +8,8 @@ class VideoEntity {
   String channeld;
   String VideoDuration;
   String UploadDateRaw;
+  String likesCount;
+  String dislikeCount;
 
   VideoEntity({
     required this.videoId,
@@ -19,5 +21,7 @@ class VideoEntity {
     required this.channeld,
     required this.VideoDuration,
     required this.UploadDateRaw,
+    required this.likesCount,
+    required this.dislikeCount,
   });
 }

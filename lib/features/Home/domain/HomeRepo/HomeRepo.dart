@@ -1,5 +1,7 @@
 
-import 'package:yt_down/features/Home/domain/Entity/VideoEntity.dart';
+
+
+import '../../../../core/entities/VideoEntity.dart';
 
 abstract class HomeRepo{
   //to get Homepage Feed

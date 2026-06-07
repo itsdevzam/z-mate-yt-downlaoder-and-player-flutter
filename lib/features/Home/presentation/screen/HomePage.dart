@@ -2,9 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
 import 'package:yt_down/core/colors/MyColors.dart';
 import 'package:yt_down/features/Home/data/RepoImpl/Home_RepoIMPL.dart';
-import 'package:yt_down/features/Home/domain/Entity/VideoEntity.dart';
 import 'package:yt_down/features/Home/presentation/widget/CustomAppbar.dart';
 import 'package:yt_down/features/Home/presentation/widget/SingleVideoView.dart';
+
+import '../../../../core/entities/VideoEntity.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -13,7 +14,6 @@ class HomePage extends StatefulWidget {
   State<HomePage> createState() => _HomePageState();
 }
 
-String? currentVideoUrl;
 List<VideoEntity>? homePageFeedList = [];
 bool isLoading = false;
 bool isLock = false;
@@ -131,5 +131,12 @@ class _HomePageState extends State<HomePage> {
         setState(() {});
       }
     });
+  }
+
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    super.dispose();
+    _scrollController.dispose();
   }
 }

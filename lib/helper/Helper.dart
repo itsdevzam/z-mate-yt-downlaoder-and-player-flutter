@@ -1,5 +1,7 @@
 import 'dart:math';
 
+import 'package:flutter/cupertino.dart';
+
 class Helper {
 
   static int getRandomNum({required int maxLength}) {
@@ -29,6 +31,14 @@ class Helper {
     } else {
       return count.toString();
     }
+  }
+
+  static double getScreenHeight(BuildContext context){
+    return MediaQuery.of(context).size.height;
+  }
+
+  static double getScreenWidth(BuildContext context){
+    return MediaQuery.of(context).size.width;
   }
 
   static List<String> homeFeedSearches = [
