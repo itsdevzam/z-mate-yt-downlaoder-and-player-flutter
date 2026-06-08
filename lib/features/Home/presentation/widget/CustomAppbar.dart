@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:yt_down/core/String/MyStrings.dart';
-
+import 'package:yt_down/features/Search/presentation/screen/SearchScreen.dart';
 import '../../../../core/colors/MyColors.dart';
-import 'BottomCurveClipper.dart';
+import '../../../../core/widget/BottomCurveClipper.dart';
+
 
 class CustomAppbar extends StatelessWidget {
   const CustomAppbar({super.key});
@@ -44,7 +45,9 @@ class CustomAppbar extends StatelessWidget {
                   radius: 22,
                   backgroundColor: MyColors.primary,
                   child: IconButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.push(context, MaterialPageRoute(builder: (context) => SearchScreen(),));
+                    },
                     icon: Icon(Icons.search, color: Colors.white),
                   ),
                 ),

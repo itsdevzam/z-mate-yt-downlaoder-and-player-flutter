@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:yt_down/core/String/MyStrings.dart';
+import 'package:yt_down/core/colors/MyColors.dart';
 import 'package:yt_down/features/splash/SplashScreen.dart';
 
 void main() {
@@ -9,14 +11,13 @@ void main() {
 class MyApp extends StatelessWidget {
 
   const MyApp({super.key});
-
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      title: MyStrings.appName,
       theme: ThemeData(
-        colorScheme: .fromSeed(seedColor: Colors.deepPurple),
+        colorScheme: .fromSeed(seedColor: MyColors.primary),
       ),
       home: const SplashScreen(),
     );

@@ -1,24 +1,12 @@
 import 'dart:math';
 import 'package:flutter/cupertino.dart';
 import 'package:youtube_explode_dart/youtube_explode_dart.dart';
-import 'package:yt_down/features/Home/data/model/VideoModel.dart';
 import 'package:yt_down/features/Home/domain/HomeRepo/HomeRepo.dart';
 import 'package:yt_down/helper/Helper.dart';
-
 import '../../../../core/entities/VideoEntity.dart';
+import '../../../../core/model/VideoModel.dart';
 
 class Home_RepoIMPL implements HomeRepo {
-  void getVideoDetail(VideoId videoID) async {
-    try {
-      var yt = YoutubeExplode();
-      var video = await yt.videos.get(videoID);
-      // print(video.engagement.);
-      // print(video.author);
-      // print(video);
-    } catch (e) {
-      print(e.toString());
-    }
-  }
 
   @override
   Future<List<VideoEntity>?> getHomePageFeed() async {
@@ -49,9 +37,4 @@ class Home_RepoIMPL implements HomeRepo {
     }
   }
 
-  @override
-  Future<List<VideoEntity>?> searchOnHomePage(String query) {
-    // TODO: implement searchOnHomePage
-    throw UnimplementedError();
-  }
 }

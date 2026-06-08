@@ -95,6 +95,7 @@ class _HomePageState extends State<HomePage> {
                 },
               ),
             ),
+
           ///custom app bar
           Positioned(top: 0, right: 0, left: 0, child: CustomAppbar()),
         ],

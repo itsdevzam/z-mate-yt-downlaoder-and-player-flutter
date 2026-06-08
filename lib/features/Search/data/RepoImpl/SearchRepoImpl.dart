@@ -1,19 +1,20 @@
 import 'package:youtube_explode_dart/youtube_explode_dart.dart';
-import '../../../../core/entities/VideoEntity.dart';
-import '../../../../core/model/VideoModel.dart';
-import '../../domain/VideoPlayerRepo/VideoPlayerRepo.dart';
+import 'package:yt_down/core/entities/VideoEntity.dart';
+import 'package:yt_down/features/Search/domain/SearchRepo/SearchRepo.dart';
 
-class VideoPlayerRepoImpl implements VideoPlayerRepo {
+import '../../../../core/model/VideoModel.dart';
+
+class SearchRepoImpl implements SearchRepo {
   @override
-  Future<List<VideoEntity>?> getSuggestedVideo({
-    required String videoTitle,
+  Future<List<VideoEntity>?> getSearchSuggestions({
+    required String query,
   }) async {
     try {
       var _ytExplode = YoutubeExplode();
-      VideoSearchList video = await _ytExplode.search.search(videoTitle);
+      VideoSearchList video = await _ytExplode.search.search(query);
       List<VideoEntity> tempList = video
-          .where((e) => e.title != videoTitle)
-          .take(10)
+          .where((e) => e.title != query)
+          .take(20)
           .map((e) {
             return VideoModel(
               videoId: e.id.toString(),

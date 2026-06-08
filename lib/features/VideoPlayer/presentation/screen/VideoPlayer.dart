@@ -5,11 +5,11 @@ import 'package:iconsax/iconsax.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
 import 'package:yt_down/core/colors/MyColors.dart';
 import 'package:yt_down/features/VideoPlayer/data/RepoImpl/VideoPlayerRepoImpl.dart';
-import 'package:yt_down/features/VideoPlayer/presentation/widget/BottomCurveClipper.dart';
 import 'package:yt_down/features/VideoPlayer/presentation/widget/IconButtonBelowVideo.dart';
 import 'package:yt_down/features/VideoPlayer/presentation/widget/SuggestedVideoLayout.dart';
 import 'package:yt_down/features/VideoPlayer/presentation/widget/VideoDetailBottomSheet.dart';
 import '../../../../core/entities/VideoEntity.dart';
+import '../../../../core/widget/BottomCurveClipper.dart';
 import '../widget/OmniPlayer.dart';
 
 class VideoPlayer extends StatefulWidget {
