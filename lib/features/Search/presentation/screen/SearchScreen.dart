@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
 import 'package:yt_down/features/Search/data/RepoImpl/SearchRepoImpl.dart';
 import 'package:yt_down/features/Search/presentation/widget/SearchTitleBar.dart';
-
 import '../../../../core/colors/MyColors.dart';
 import '../../../../core/entities/VideoEntity.dart';
 import '../widget/SingleVideoView.dart';

@@ -13,8 +13,6 @@ class SearchRepoImpl implements SearchRepo {
       var _ytExplode = YoutubeExplode();
       VideoSearchList video = await _ytExplode.search.search(query);
       List<VideoEntity> tempList = video
-          .where((e) => e.title != query)
-          .take(20)
           .map((e) {
             return VideoModel(
               videoId: e.id.toString(),

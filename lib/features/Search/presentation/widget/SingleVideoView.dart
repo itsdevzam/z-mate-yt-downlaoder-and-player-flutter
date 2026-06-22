@@ -8,30 +8,38 @@ import '../../../../core/entities/VideoEntity.dart';
 
 class SingleVideoView extends StatelessWidget {
   final VideoEntity videoEntity;
+
   const SingleVideoView({super.key, required this.videoEntity});
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: MediaQuery.of(context).size.width,
+      width: MediaQuery
+          .of(context)
+          .size
+          .width,
       padding: EdgeInsets.only(bottom: 10),
       child: Card(
         color: MyColors.white,
         elevation: 3,
         margin: EdgeInsets.only(top: 15, left: 13, right: 13),
         child: GestureDetector(
-          onTap: () => Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder: (context) =>
-                  VideoPlayer(videoEntity: videoEntity),
-            ),
-          ),
+          onTap: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) =>
+                    VideoPlayer(videoEntity: videoEntity),
+              ),
+            );
+          },
           child: Column(
             mainAxisSize: .max,
             children: [
               ClipRRect(
-                borderRadius: BorderRadiusGeometry.only(topLeft: Radius.circular(10),topRight: Radius.circular(10)),
+                borderRadius: BorderRadiusGeometry.only(
+                    topLeft: Radius.circular(10),
+                    topRight: Radius.circular(10)),
                 child: FadeInImage(
                   placeholder: AssetImage(ImagePath.placeHolder),
                   image: NetworkImage(videoEntity.thumbnail, scale: 0.5),
@@ -49,7 +57,7 @@ class SingleVideoView extends StatelessWidget {
                       overflow: TextOverflow.ellipsis,
                       style: TextStyle(fontWeight: FontWeight.bold),
                     ),
-        
+
                     Text(
                       videoEntity.author,
                       style: TextStyle(
@@ -62,7 +70,8 @@ class SingleVideoView extends StatelessWidget {
                       spacing: 15,
                       children: [
                         Text(
-                          '${Helper.viewsFormat(views: videoEntity.views)} views',
+                          '${Helper.viewsFormat(views: videoEntity
+                              .views)} views',
                           style: TextStyle(
                             color: Colors.grey.shade700,
                             fontWeight: FontWeight.bold,

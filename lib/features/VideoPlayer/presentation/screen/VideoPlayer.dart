@@ -114,7 +114,7 @@ class _VideoPlayerState extends State<VideoPlayer> {
                     mainAxisAlignment: .start,
                     children: [
                       ///Youtube Player
-                      OmniPlayer(currentVideoUrl: widget.videoEntity.videoId),
+                      AspectRatio(aspectRatio: 16/9,child: OmniPlayer(currentVideoUrl: widget.videoEntity.videoId)),
 
                       ///Title Area
                       Padding(

@@ -108,6 +108,8 @@ class _OmniPlayerState extends State<OmniPlayer> {
           customAspectRatioNormal: null,
           customAspectRatioFullScreen: null,
           fullscreenOrientation: null,
+          fullscreenVideoFit: BoxFit.contain,
+          showFullscreenVideoFitButton: true,
           showBottomControlsBarOnPause: false,
           alwaysShowBottomControlsBar: false,
           fitVideoToBounds: true,
