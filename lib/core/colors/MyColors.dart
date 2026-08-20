@@ -5,6 +5,7 @@ class MyColors {
   static Color secondary = Colors.grey.shade400;
   static Color black = Colors.black87;
   static Color white = Colors.white;
+  static Color blue = Colors.blueAccent;
   static Color shadowColor = Colors.grey;
   static Color transparent = Colors.transparent;
 }

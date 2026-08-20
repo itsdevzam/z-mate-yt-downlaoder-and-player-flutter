@@ -4,10 +4,12 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
 import 'package:yt_down/core/colors/MyColors.dart';
+import 'package:yt_down/core/entities/VideoDownloadEntity.dart';
 import 'package:yt_down/features/VideoPlayer/data/RepoImpl/VideoPlayerRepoImpl.dart';
 import 'package:yt_down/features/VideoPlayer/presentation/widget/IconButtonBelowVideo.dart';
 import 'package:yt_down/features/VideoPlayer/presentation/widget/SuggestedVideoLayout.dart';
 import 'package:yt_down/features/VideoPlayer/presentation/widget/VideoDetailBottomSheet.dart';
+import 'package:yt_down/features/VideoPlayer/presentation/widget/VideoDownloadBottomSheet.dart';
 import '../../../../core/entities/VideoEntity.dart';
 import '../../../../core/widget/BottomCurveClipper.dart';
 import '../widget/OmniPlayer.dart';
@@ -23,6 +25,8 @@ class VideoPlayer extends StatefulWidget {
 
 List<VideoEntity>? suggestedVideoList = [];
 bool _isLoading = false;
+bool _isLoadingDownload = false;
+int aa = 0;
 
 class _VideoPlayerState extends State<VideoPlayer> {
   @override
@@ -50,7 +54,8 @@ class _VideoPlayerState extends State<VideoPlayer> {
                         ),
 
                       ///when loading false and list empty
-                      if ((suggestedVideoList == null || suggestedVideoList!.isEmpty) &&
+                      if ((suggestedVideoList == null ||
+                              suggestedVideoList!.isEmpty) &&
                           !_isLoading)
                         Expanded(
                           child: Center(
@@ -82,7 +87,9 @@ class _VideoPlayerState extends State<VideoPlayer> {
                                   ),
                                   child: Text(
                                     'Suggested Videos',
-                                    style: TextStyle(fontWeight: FontWeight.bold),
+                                    style: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                    ),
                                   ),
                                 ),
                                 ListView.builder(
@@ -114,7 +121,12 @@ class _VideoPlayerState extends State<VideoPlayer> {
                     mainAxisAlignment: .start,
                     children: [
                       ///Youtube Player
-                      AspectRatio(aspectRatio: 16/9,child: OmniPlayer(currentVideoUrl: widget.videoEntity.videoId)),
+                      AspectRatio(
+                        aspectRatio: 16 / 9,
+                        child: OmniPlayer(
+                          currentVideoUrl: widget.videoEntity.videoId,
+                        ),
+                      ),
 
                       ///Title Area
                       Padding(
@@ -140,9 +152,9 @@ class _VideoPlayerState extends State<VideoPlayer> {
                                 ///Video Detail Bottom Sheet
                                 VideoDetailBottomSheet()
                                     .showVideoDetailBottomSheet(
-                                  context: context,
-                                  videoEntity: widget.videoEntity,
-                                );
+                                      context: context,
+                                      videoEntity: widget.videoEntity,
+                                    );
                               },
                               icon: Icon(Iconsax.arrow_down_1),
                             ),
@@ -176,7 +188,7 @@ class _VideoPlayerState extends State<VideoPlayer> {
                                 Clipboard.setData(
                                   ClipboardData(
                                     text:
-                                    'https://www.youtube.com/watch?v=${widget.videoEntity.videoId}',
+                                        'https://www.youtube.com/watch?v=${widget.videoEntity.videoId}',
                                   ),
                                 );
                                 Fluttertoast.showToast(
@@ -189,12 +201,46 @@ class _VideoPlayerState extends State<VideoPlayer> {
                                 );
                               },
                             ),
-                            IconButtonBelowVideo(
-                              iconData: Iconsax.arrow_down_2,
-                              text: 'Download',
-                              secondaryText: 'Likes',
-                              callback: () {},
-                            ),
+                            _isLoadingDownload
+                                ? Padding(
+                                  padding: const EdgeInsets.only(right: 20.0),
+                                  child: LoadingAnimationWidget.beat(
+                                      color: MyColors.primary,
+                                      size: 30,
+                                    ),
+                                )
+                                : IconButtonBelowVideo(
+                                    iconData: Iconsax.arrow_down_2,
+                                    text: 'Download',
+                                    secondaryText: 'Likes',
+                                    callback: () async {
+                                      ///Video Download Bottom Sheet
+                                      _isLoadingDownload = true;
+                                      setState(() {});
+                                      VideoDownloadEntity videoDownloadEntity =
+                                          await VideoPlayerRepoImpl()
+                                              .getVideoMetaData(
+                                                title: widget.videoEntity.title,
+                                                videoId:
+                                                    widget.videoEntity.videoId,
+                                                thumbnail: widget
+                                                    .videoEntity
+                                                    .thumbnail,
+                                                views: widget.videoEntity.views,
+                                                videoDuration: widget
+                                                    .videoEntity
+                                                    .VideoDuration,
+                                              );
+                                      _isLoadingDownload = false;
+                                      setState(() {});
+                                      VideoDownloadBottomSheet()
+                                          .showVideoDownloadBottomSheet(
+                                            context: context,
+                                            videoDownloadEntity:
+                                                videoDownloadEntity,
+                                          );
+                                    },
+                                  ),
                           ],
                         ),
                       ),
@@ -203,7 +249,6 @@ class _VideoPlayerState extends State<VideoPlayer> {
                   ),
                 ),
               ),
-
             ],
           ),
         ),
@@ -227,6 +272,4 @@ class _VideoPlayerState extends State<VideoPlayer> {
     _isLoading = false;
     setState(() {});
   }
-
-
 }

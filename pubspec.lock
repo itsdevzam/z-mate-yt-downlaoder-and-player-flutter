@@ -25,6 +25,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.13.1"
+  awesome_video_downloader:
+    dependency: "direct main"
+    description:
+      name: awesome_video_downloader
+      sha256: b7714bef6366d8ec82bce8459622b07566c9a6ac2d236e22eed445b2eb20b37e
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.1.0+1"
   boolean_selector:
     dependency: transitive
     description:

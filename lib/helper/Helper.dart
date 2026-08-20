@@ -41,6 +41,16 @@ class Helper {
     return MediaQuery.of(context).size.width;
   }
 
+  static String getFormat(String format){
+    if(format.contains('mp4')){
+      return 'MP4';
+    }else if(format.contains('webm')){
+      return 'WebM';
+    }else {
+      return '';
+    }
+  }
+
   static List<String> homeFeedSearches = [
     "latest trending videos",
     "breaking world news",
