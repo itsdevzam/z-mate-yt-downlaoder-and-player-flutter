@@ -20,23 +20,23 @@ The project focuses on learning Flutter application architecture, YouTube metada
 
 ### Home
 
-![Home](assets/github_images/home.png)
+<img src="assets/github_images/home.png" width="250">
 
 ### Search
 
-![Search](assets/github_images/search.png)
+<img src="assets/github_images/search.png" width="250">
 
 ### Player
 
-![Player](assets/github_images/player.png)
+<img src="assets/github_images/player.png" width="250">
 
 ### Playing
 
-![Playing](assets/github_images/playing.png)
+<img src="assets/github_images/playing.png" width="250">
 
 ### Downloads
 
-![Downloads](assets/github_images/download.png)
+<img src="assets/github_images/download.png" width="250">
 
 ## 🛠️ Built With
 
