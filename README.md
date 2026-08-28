@@ -1,8 +1,8 @@
 # Z-mate
 
-**Z-mate** is a simple Flutter-based YouTube video downloader and player, created primarily as an educational project.
+**Z-mate** is a simple Flutter-based YouTube video downloader and player.
 
-The project focuses on learning Flutter application architecture, YouTube metadata/stream handling, background downloads, local media management, and video playback.
+The project focuses on YouTube metadata/stream handling, background downloads, local media management, and video playback.
 
 ## ✨ Features
 
@@ -48,9 +48,7 @@ The project focuses on learning Flutter application architecture, YouTube metada
 
 ## 🎯 Project Purpose
 
-Z-mate is an educational project rather than a production-grade downloader.
-
-The main goal is to understand how the different parts of a Flutter application work together:
+**Z-mate** is a simple Flutter-based YouTube video downloader and player.
 
 ```text
 YouTube
