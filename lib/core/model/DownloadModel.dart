@@ -58,4 +58,20 @@ class DownloadModel {
 
     return DownloadType.unknown;
   }
+
+  DownloadModel copyWith({
+    int? progress,
+    DownloadTaskStatus? status,
+  }) {
+    return DownloadModel(
+      taskId: taskId,
+      allowCellular: allowCellular,
+      filename: filename,
+      progress: progress ?? this.progress,
+      savedDir: savedDir,
+      status: status ?? this.status,
+      timeCreated: timeCreated,
+      url: url,
+    );
+  }
 }

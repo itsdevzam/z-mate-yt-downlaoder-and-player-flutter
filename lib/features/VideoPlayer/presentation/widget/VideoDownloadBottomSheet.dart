@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:yt_down/core/entities/VideoDownloadEntity.dart';
 import 'package:yt_down/core/enum/DownloadStreamType.dart';
 import 'package:yt_down/core/enum/DownloadType.dart';
+import 'package:yt_down/core/services/PythonServices.dart';
 import 'package:yt_down/features/VideoPlayer/presentation/widget/DownloadButtonBottomSheet.dart';
 import '../../../../core/colors/MyColors.dart';
 import '../../../../core/images/ImagePath.dart';
@@ -144,28 +145,29 @@ class VideoDownloadBottomSheet {
                                 child: Center(
                                   child: DownloadButtonBottomSheet(
                                     callback: () {
-                                      Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                          builder: (context) => DownlaodPage(
-                                            videoUrl:
-                                                muxOptions[selectedVideoIndex]
-                                                    .url,
-                                            videoTitle:
-                                                videoDownloadEntity.videoTitle,
-                                            downloadType: DownloadType.video,
-                                            audioTag:
-                                                audioOptions[selectedAudioIndex]
-                                                    .audioTag,
-                                            videoId:
-                                                videoDownloadEntity.videoId,
-                                            downloadFormat: Helper.getFormat(
-                                              muxOptions[selectedVideoIndex]
-                                                  .format,
-                                            ),
-                                          ),
-                                        ),
-                                      );
+                                      ///Unused we use mux only
+                                      // Navigator.push(
+                                      //   context,
+                                      //   MaterialPageRoute(
+                                      //     builder: (context) => DownlaodPage(
+                                      //       videoUrl:
+                                      //           muxOptions[selectedVideoIndex]
+                                      //               .url,
+                                      //       videoTitle:
+                                      //           videoDownloadEntity.videoTitle,
+                                      //       downloadType: DownloadType.video,
+                                      //       audioTag:
+                                      //           audioOptions[selectedAudioIndex]
+                                      //               .audioTag,
+                                      //       videoId:
+                                      //           videoDownloadEntity.videoId,
+                                      //       downloadFormat: Helper.getFormat(
+                                      //         muxOptions[selectedVideoIndex]
+                                      //             .format,
+                                      //       ),
+                                      //     ),
+                                      //   ),
+                                      // );
                                     },
                                   ),
                                 ),
@@ -216,29 +218,30 @@ class VideoDownloadBottomSheet {
                                 right: 0,
                                 child: Center(
                                   child: DownloadButtonBottomSheet(
-                                    callback: () {
-                                      Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                          builder: (context) => DownlaodPage(
-                                            videoUrl:
-                                                audioOptions[selectedAudioIndex]
-                                                    .url,
-                                            videoTitle:
-                                                videoDownloadEntity.videoTitle,
-                                            downloadType: DownloadType.audio,
-                                            audioTag:
-                                                audioOptions[selectedAudioIndex]
-                                                    .audioTag,
-                                            videoId:
-                                                videoDownloadEntity.videoId,
-                                            downloadFormat: Helper.getFormat(
-                                              audioOptions[selectedAudioIndex]
-                                                  .format,
-                                            ),
-                                          ),
-                                        ),
-                                      );
+                                    callback: () async{
+                                      ///Unused we use mux only
+                                      // Navigator.push(
+                                      //   context,
+                                      //   MaterialPageRoute(
+                                      //     builder: (context) => DownlaodPage(
+                                      //       videoUrl:
+                                      //           audioOptions[selectedAudioIndex]
+                                      //               .url,
+                                      //       videoTitle:
+                                      //           videoDownloadEntity.videoTitle,
+                                      //       downloadType: DownloadType.audio,
+                                      //       audioTag:
+                                      //           audioOptions[selectedAudioIndex]
+                                      //               .audioTag,
+                                      //       videoId:
+                                      //           videoDownloadEntity.videoId,
+                                      //       downloadFormat: Helper.getFormat(
+                                      //         audioOptions[selectedAudioIndex]
+                                      //             .format,
+                                      //       ),
+                                      //     ),
+                                      //   ),
+                                      // );
                                     },
                                   ),
                                 ),

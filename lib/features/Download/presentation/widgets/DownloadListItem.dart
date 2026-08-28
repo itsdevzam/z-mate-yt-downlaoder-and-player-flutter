@@ -10,8 +10,8 @@ import '../../../../core/colors/MyColors.dart';
 
 class DownloadListItem extends StatelessWidget {
   final DownloadModel downloadModel;
-
-  DownloadListItem({super.key, required this.downloadModel});
+  final VoidCallback onDelete;
+  DownloadListItem({super.key, required this.downloadModel,required this.onDelete});
 
   final _downloadRepoImpl = DownloadRepoImpl();
 
@@ -35,13 +35,14 @@ class DownloadListItem extends StatelessWidget {
             spacing: 10,
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Icon(switch (downloadModel.fileType) {
-                DownloadType.video => Iconsax.video,
-                DownloadType.audio => Iconsax.music,
-                DownloadType.unknown => Iconsax.folder,
-              }, color: MyColors.primary),
+              Icon(Iconsax.video, color: MyColors.primary),
+              // Icon(switch (downloadModel.fileType) {
+              //   DownloadType.video => Iconsax.video,
+              //   DownloadType.audio => Iconsax.music,
+              //   DownloadType.unknown => Iconsax.folder,
+              // }, color: MyColors.primary),
               SizedBox(
-                width: Helper.getScreenWidth(context) / 2,
+                width: Helper.getScreenWidth(context) / 2.2,
                 child: Text(
                   downloadModel.filename!,
                   overflow: TextOverflow.ellipsis,
@@ -49,16 +50,74 @@ class DownloadListItem extends StatelessWidget {
                 ),
               ),
               Spacer(),
-              Icon(
-                downloadModel.status == DownloadTaskStatus.complete
-                    ? Iconsax.tick_circle
-                    : Iconsax.arrow_down,
-                size: 20,
-                color: downloadModel.status == DownloadTaskStatus.complete
-                    ? Colors.green
-                    : Colors.red,
+              downloadModel.status == DownloadTaskStatus.complete
+                  ? const Icon(
+                      Iconsax.tick_circle,
+                      size: 20,
+                      color: Colors.green,
+                    )
+                  : downloadModel.status == DownloadTaskStatus.failed
+                  ? const Icon(
+                      Iconsax.close_circle,
+                      size: 20,
+                      color: Colors.redAccent,
+                    )
+                  : SizedBox(
+                      width: 30,
+                      height: 30,
+                      child: Stack(
+                        alignment: Alignment.center,
+                        children: [
+                          CircularProgressIndicator(
+                            color: MyColors.primary,
+                            strokeWidth: 2,
+                            backgroundColor: MyColors.secondary.withAlpha(100),
+                            value: downloadModel.progress != null
+                                ? downloadModel.progress! / 100
+                                : 0,
+                          ),
+                          Text(
+                            '${downloadModel.progress ?? 0}',
+                            style: const TextStyle(
+                              fontSize: 10,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+              IconButton(
+                onPressed: () {
+                  showDialog(
+                    context: context,
+                    builder: (context) => AlertDialog(
+                      title: Text('Are you sure you want delete this file?'),
+                      backgroundColor: Colors.white,
+                      titleTextStyle: TextStyle(
+                        fontSize: 15,
+                        color: Colors.black,
+                      ),
+                      actions: [
+                        TextButton(
+                          onPressed: () {
+                            Navigator.pop(context);
+                          },
+                          child: Text('Cancel'),
+                        ),
+                        TextButton(
+                          onPressed: () {
+                            _downloadRepoImpl.removeTask(downloadModel.taskId!);
+                            Navigator.pop(context);
+                            onDelete();
+                          },
+                          child: Text('Delete'),
+                        ),
+                      ],
+                    ),
+                  );
+                },
+                icon: Icon(Iconsax.trash, size: 20),
               ),
-              IconButton(onPressed: () {}, icon: Icon(Iconsax.trash, size: 20)),
             ],
           ),
         ),

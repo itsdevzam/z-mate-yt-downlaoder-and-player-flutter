@@ -1,16 +1,124 @@
-# yt_down
+# Z-mate
 
-A new Flutter project.
+**Z-mate** is a simple Flutter-based YouTube video downloader and player, created primarily as an educational project.
 
-## Getting Started
+The project focuses on learning Flutter application architecture, YouTube metadata/stream handling, background downloads, local media management, and video playback.
 
-This project is a starting point for a Flutter application.
+## ✨ Features
 
-A few resources to get you started if this is your first Flutter project:
+- 🔎 Search YouTube videos
+- 🎬 View video information
+- ▶️ Play videos inside the app
+- 📥 Download supported muxed video streams
+- 🔔 Background download notifications
+- 📊 Download progress tracking
+- 🗂️ Download list management
+- 🗑️ Delete downloaded files
+- 📱 Simple Flutter UI
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+## 📱 Screenshots
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+### Home
+
+![Home](assets/github_images/home.png)
+
+### Search
+
+![Search](assets/github_images/search.png)
+
+### Player
+
+![Player](assets/github_images/player.png)
+
+### Playing
+
+![Playing](assets/github_images/playing.png)
+
+### Downloads
+
+![Downloads](assets/github_images/download.png)
+
+## 🛠️ Built With
+
+- **Flutter / Dart**
+- **youtube_explode_dart** — YouTube metadata and stream information
+- **flutter_downloader** — background file downloads
+- **video_player** — video playback
+- **Iconsax** — icons
+
+## 🎯 Project Purpose
+
+Z-mate is an educational project rather than a production-grade downloader.
+
+The main goal is to understand how the different parts of a Flutter application work together:
+
+```text
+YouTube
+   ↓
+Metadata / Stream Information
+   ↓
+Flutter
+   ↓
+Background Downloader
+   ↓
+Local Storage
+   ↓
+Video Player
+```
+
+The project intentionally keeps the implementation relatively simple instead of trying to build a complete high-definition downloading system with complex stream processing.
+
+## 📂 Project Structure
+
+The project follows a feature-oriented structure with separate layers for presentation, domain, and data.
+
+```text
+lib/
+├── core/
+├── features/
+│   ├── Download/
+│   ├── Home/
+│   ├── Player/
+│   └── Search/
+├── helper/
+└── main.dart
+```
+
+## 🚀 Getting Started
+
+### Requirements
+
+- Flutter SDK
+- Android Studio / Android SDK
+- Android device or emulator
+
+### Run the project
+
+```bash
+flutter pub get
+flutter run
+```
+
+### Build APK
+
+```bash
+flutter build apk
+```
+
+## 📚 Educational Note
+
+This project is intended for learning and experimentation with Flutter, background downloading, media playback, and application architecture.
+
+Use the project responsibly and make sure you have the necessary rights to download or use any content.
+
+## 👨‍💻 Author
+
+**DevZam**
+
+GitHub:
+
+[https://github.com/itsdevzam](https://github.com/itsdevzam)
+
+## 📄 License
+
+This project is provided for educational purposes.

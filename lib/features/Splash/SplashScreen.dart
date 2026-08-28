@@ -1,6 +1,8 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:yt_down/core/String/MyStrings.dart';
+import 'package:yt_down/features/Dashboard/screen/DashboardScreen.dart';
 import 'package:yt_down/features/Home/presentation/screen/HomePage.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -13,7 +15,14 @@ class SplashScreen extends StatefulWidget {
 class _SplashScreenState extends State<SplashScreen> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(body: Center(child: Text('Yt Downloader')));
+    return Scaffold(
+      body: Center(
+        child: ClipRRect(
+          borderRadius: BorderRadiusGeometry.circular(10),
+          child: Image.asset('assets/images/splash.png',width: 280,),
+        ),
+      ),
+    );
   }
 
   @override
@@ -24,7 +33,7 @@ class _SplashScreenState extends State<SplashScreen> {
       Duration(seconds: 3),
       () => Navigator.pushReplacement(
         context,
-        MaterialPageRoute(builder: (context) => HomePage()),
+        MaterialPageRoute(builder: (context) => DashboardScreen()),
       ),
     );
   }

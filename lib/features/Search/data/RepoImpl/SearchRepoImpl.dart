@@ -29,6 +29,7 @@ class SearchRepoImpl implements SearchRepo {
             );
           })
           .toList();
+      print(tempList);
       return tempList;
     } catch (e) {
       print(e.toString());

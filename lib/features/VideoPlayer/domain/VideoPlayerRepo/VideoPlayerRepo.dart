@@ -6,12 +6,18 @@ abstract class VideoPlayerRepo {
   Future<List<VideoEntity>?> getSuggestedVideo({required String videoTitle});
 
   ///generate video metadata
-  Future<VideoDownloadEntity> getVideoMetaData({
-    required String title,
-    required String videoId,
-    required String thumbnail,
-    required String views,
-    required String videoDuration,
-  });
+  // Future<VideoDownloadEntity> getVideoMetaData({
+  //   required String title,
+  //   required String videoId,
+  //   required String thumbnail,
+  //   required String views,
+  //   required String videoDuration,
+  // });
+
+  ///generateMux Metadata
+  Future<void> getMuxOnlyMetaData({required String videoId,required String videoTitle});
+
+  ///Download mux
+  Future<void>downloadMux({required String videoId,required String videoTitle});
 
 }

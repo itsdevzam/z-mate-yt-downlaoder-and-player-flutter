@@ -203,12 +203,12 @@ class _VideoPlayerState extends State<VideoPlayer> {
                             ),
                             _isLoadingDownload
                                 ? Padding(
-                                  padding: const EdgeInsets.only(right: 20.0),
-                                  child: LoadingAnimationWidget.beat(
+                                    padding: const EdgeInsets.only(right: 20.0),
+                                    child: LoadingAnimationWidget.beat(
                                       color: MyColors.primary,
                                       size: 30,
                                     ),
-                                )
+                                  )
                                 : IconButtonBelowVideo(
                                     iconData: Iconsax.arrow_down_2,
                                     text: 'Download',
@@ -217,28 +217,35 @@ class _VideoPlayerState extends State<VideoPlayer> {
                                       ///Video Download Bottom Sheet
                                       _isLoadingDownload = true;
                                       setState(() {});
-                                      VideoDownloadEntity videoDownloadEntity =
-                                          await VideoPlayerRepoImpl()
-                                              .getVideoMetaData(
-                                                title: widget.videoEntity.title,
-                                                videoId:
-                                                    widget.videoEntity.videoId,
-                                                thumbnail: widget
-                                                    .videoEntity
-                                                    .thumbnail,
-                                                views: widget.videoEntity.views,
-                                                videoDuration: widget
-                                                    .videoEntity
-                                                    .VideoDuration,
-                                              );
+                                      await VideoPlayerRepoImpl().downloadMux(
+                                        videoId: widget.videoEntity.videoId,
+                                        videoTitle: widget.videoEntity.title,
+                                      );
+                                      ///unused we use mux only
+                                      // VideoDownloadEntity videoDownloadEntity =
+                                      //     await VideoPlayerRepoImpl()
+                                      //         .getVideoMetaData(
+                                      //           title: widget.videoEntity.title,
+                                      //           videoId:
+                                      //               widget.videoEntity.videoId,
+                                      //           thumbnail: widget
+                                      //               .videoEntity
+                                      //               .thumbnail,
+                                      //           views: widget.videoEntity.views,
+                                      //           videoDuration: widget
+                                      //               .videoEntity
+                                      //               .VideoDuration,
+                                      //         );
                                       _isLoadingDownload = false;
                                       setState(() {});
-                                      VideoDownloadBottomSheet()
-                                          .showVideoDownloadBottomSheet(
-                                            context: context,
-                                            videoDownloadEntity:
-                                                videoDownloadEntity,
-                                          );
+
+                                      ///unused we use mux only
+                                      // VideoDownloadBottomSheet()
+                                      //     .showVideoDownloadBottomSheet(
+                                      //       context: context,
+                                      //       videoDownloadEntity:
+                                      //           videoDownloadEntity,
+                                      //     );
                                     },
                                   ),
                           ],
@@ -260,8 +267,8 @@ class _VideoPlayerState extends State<VideoPlayer> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    _isLoading=false;
-    _isLoadingDownload=false;
+    _isLoading = false;
+    _isLoadingDownload = false;
     getSuggestedVideos();
   }
 

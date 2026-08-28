@@ -4,7 +4,9 @@ import '../../../../core/model/DownloadModel.dart';
 
 abstract class DownloadRepo{
   ///Download Video
-  Future<void> downloadVideo(String videoUrl,String videoTitle,String downloadFormat,DownloadType downloadType,String audioTag,String videoId);
+  ///Unused we use mux only
+  // Future<void> downloadVideo(String videoUrl,String videoTitle,String downloadFormat,DownloadType downloadType,String audioTag,String videoId);
+  Future<void> downloadVideo({required String videoUrl,required String videoTitle});
   ///Show Download List
   Future<List<DownloadModel>> showDownloadList();
   ///Cancel task

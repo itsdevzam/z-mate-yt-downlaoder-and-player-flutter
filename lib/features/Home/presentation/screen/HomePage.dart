@@ -5,6 +5,7 @@ import 'package:yt_down/features/Home/data/RepoImpl/Home_RepoIMPL.dart';
 import 'package:yt_down/features/Home/presentation/widget/CustomAppbar.dart';
 import 'package:yt_down/features/Home/presentation/widget/SingleVideoView.dart';
 
+import '../../../../core/String/MyStrings.dart';
 import '../../../../core/entities/VideoEntity.dart';
 
 class HomePage extends StatefulWidget {
@@ -41,13 +42,19 @@ class _HomePageState extends State<HomePage> {
           ///when loading false and list empty
           if ((homePageFeedList == null || homePageFeedList!.isEmpty) && !isLoading)
             Center(
-              child: Text(
-                'Video List Not Available',
-                style: TextStyle(
-                  color: Colors.black,
-                  fontSize: 22,
-                  fontWeight: FontWeight.bold,
-                ),
+              child: Column(
+                children: [
+                  Text(
+                    'Video List Not Available',
+                    style: TextStyle(
+                      color: Colors.black,
+                      fontSize: 22,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  
+                  TextButton(onPressed: ()=>getHomePage(), child: Text('Refresh'))
+                ],
               ),
             ),
 
@@ -97,7 +104,7 @@ class _HomePageState extends State<HomePage> {
             ),
 
           ///custom app bar
-          Positioned(top: 0, right: 0, left: 0, child: CustomAppbar()),
+          Positioned(top: 0, right: 0, left: 0, child: CustomAppbar(text: '${MyStrings.appName} Player',)),
         ],
       ),
     );

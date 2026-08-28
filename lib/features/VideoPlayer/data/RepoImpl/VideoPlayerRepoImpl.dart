@@ -1,8 +1,11 @@
 import 'dart:math';
 
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:youtube_explode_dart/youtube_explode_dart.dart';
+import 'package:yt_down/core/colors/MyColors.dart';
 import 'package:yt_down/core/entities/VideoDownloadOption.dart';
 import 'package:yt_down/core/enum/DownloadStreamType.dart';
+import 'package:yt_down/features/Download/data/RepoImpl/DownloadRepoImpl.dart';
 import '../../../../core/entities/VideoDownloadEntity.dart';
 import '../../../../core/entities/VideoEntity.dart';
 import '../../../../core/model/VideoModel.dart';
@@ -10,6 +13,24 @@ import '../../domain/VideoPlayerRepo/VideoPlayerRepo.dart';
 
 class VideoPlayerRepoImpl implements VideoPlayerRepo {
   var _ytExplode = YoutubeExplode();
+
+  @override
+  Future<void>downloadMux({required String videoId,required String videoTitle})async{
+    String videoUrl = await getMuxOnlyMetaData(videoId: videoId, videoTitle: videoTitle);
+    await DownloadRepoImpl().downloadVideo(videoUrl: videoUrl, videoTitle: videoTitle);
+  }
+
+  @override
+  Future<String> getMuxOnlyMetaData({required String videoId,required String videoTitle})async {
+    var manifest = await _ytExplode.videos.streams.getManifest(videoId);
+    final muxed = manifest.muxed;
+    if (muxed.isEmpty) {
+      Fluttertoast.showToast(msg: 'Video is not available for download',backgroundColor: MyColors.primary);
+      return '';
+    }
+    final bestMuxed = muxed.withHighestBitrate();
+    return bestMuxed.url.toString();
+  }
 
   @override
   Future<List<VideoEntity>?> getSuggestedVideo({
@@ -43,58 +64,60 @@ class VideoPlayerRepoImpl implements VideoPlayerRepo {
     }
   }
 
-  @override
-  Future<VideoDownloadEntity> getVideoMetaData({
-    required String title,
-    required String videoId,
-    required String thumbnail,
-    required String views,
-    required String videoDuration,
-  }) async {
-    var manifest = await _ytExplode.videos.streams.getManifest(videoId);
-    List<VideoDownloadOption> downloadOptionsList = manifest.streams.map((
-      element,
-    ) {
-      final DownloadStreamType streamType = getStreamType(element);
-      final trackName = getTrackName(element);
-      print('Track Name $trackName and URL ${element.url}');
-      return VideoDownloadOption(
-        quality: element.qualityLabel,
-        format: element.codec.toString(),
-        url: element.url.toString(),
-        size: element.size.toString(),
-        trackName: trackName,
-        audioTag: element.tag.toString(),
-        type: streamType,
-      );
-    }).toList();
-    return VideoDownloadEntity(
-      videoTitle: title,
-      thumbnail: thumbnail,
-      views: views,
-      videoId: videoId,
-      videoDuration: videoDuration,
-      downloadOptions: downloadOptionsList,
-    );
-  }
+  // @override
+  // Future<VideoDownloadEntity> getVideoMetaData({
+  //   required String title,
+  //   required String videoId,
+  //   required String thumbnail,
+  //   required String views,
+  //   required String videoDuration,
+  // }) async {
+  //   var manifest = await _ytExplode.videos.streams.getManifest(videoId);
+  //   List<VideoDownloadOption> downloadOptionsList = manifest.streams.map((
+  //     element,
+  //   ) {
+  //     final DownloadStreamType streamType = getStreamType(element);
+  //     final trackName = getTrackName(element);
+  //     // print('Track Name $trackName and URL ${element.url}');
+  //     return VideoDownloadOption(
+  //       quality: element.qualityLabel,
+  //       format: element.codec.toString(),
+  //       url: element.url.toString(),
+  //       size: element.size.toString(),
+  //       trackName: trackName,
+  //       audioTag: element.tag.toString(),
+  //       type: streamType,
+  //     );
+  //   }).toList();
+  //   return VideoDownloadEntity(
+  //     videoTitle: title,
+  //     thumbnail: thumbnail,
+  //     views: views,
+  //     videoId: videoId,
+  //     videoDuration: videoDuration,
+  //     downloadOptions: downloadOptionsList,
+  //   );
+  // }
+  //
+  // DownloadStreamType getStreamType(StreamInfo element) {
+  //   if (element is MuxedStreamInfo) {
+  //     return DownloadStreamType.muxed;
+  //   } else if (element is VideoOnlyStreamInfo) {
+  //     return DownloadStreamType.video;
+  //   } else if (element is AudioOnlyStreamInfo) {
+  //     return DownloadStreamType.audio;
+  //   }
+  //
+  //   throw UnsupportedError('Unsupported stream type: ${element.runtimeType}');
+  // }
+  //
+  // String getTrackName(StreamInfo element){
+  //   if (element is AudioOnlyStreamInfo) {
+  //     return element.audioTrack?.displayName??'Default';
+  //   }else{
+  //     return element.codec.type;
+  //   }
+  // }
 
-  DownloadStreamType getStreamType(StreamInfo element) {
-    if (element is MuxedStreamInfo) {
-      return DownloadStreamType.muxed;
-    } else if (element is VideoOnlyStreamInfo) {
-      return DownloadStreamType.video;
-    } else if (element is AudioOnlyStreamInfo) {
-      return DownloadStreamType.audio;
-    }
 
-    throw UnsupportedError('Unsupported stream type: ${element.runtimeType}');
-  }
-
-  String getTrackName(StreamInfo element){
-    if (element is AudioOnlyStreamInfo) {
-      return element.audioTrack?.displayName??'Default';
-    }else{
-      return element.codec.type;
-    }
-  }
 }
