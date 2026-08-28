@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:yt_down/core/entities/VideoDownloadEntity.dart';
 import 'package:yt_down/core/enum/DownloadStreamType.dart';
+import 'package:yt_down/core/enum/DownloadType.dart';
 import 'package:yt_down/features/VideoPlayer/presentation/widget/DownloadButtonBottomSheet.dart';
 import '../../../../core/colors/MyColors.dart';
 import '../../../../core/images/ImagePath.dart';
@@ -120,7 +121,12 @@ class VideoDownloadBottomSheet {
                                       ),
                                     ),
                                   ),
-                                  title: Text(videoDownloadEntity.videoTitle),
+                                  title: Text(
+                                    videoDownloadEntity.videoTitle,
+                                    maxLines: 2,
+                                    overflow: TextOverflow.ellipsis,
+                                  ),
+                                  subtitle: Text(muxOptions[index].size),
                                   minTileHeight: 70,
                                   onTap: () {
                                     setState(() {
@@ -145,6 +151,18 @@ class VideoDownloadBottomSheet {
                                             videoUrl:
                                                 muxOptions[selectedVideoIndex]
                                                     .url,
+                                            videoTitle:
+                                                videoDownloadEntity.videoTitle,
+                                            downloadType: DownloadType.video,
+                                            audioTag:
+                                                audioOptions[selectedAudioIndex]
+                                                    .audioTag,
+                                            videoId:
+                                                videoDownloadEntity.videoId,
+                                            downloadFormat: Helper.getFormat(
+                                              muxOptions[selectedVideoIndex]
+                                                  .format,
+                                            ),
                                           ),
                                         ),
                                       );
@@ -180,7 +198,8 @@ class VideoDownloadBottomSheet {
                                       ),
                                     ),
                                   ),
-                                  title: Text(videoDownloadEntity.videoTitle),
+                                  title: Text(audioOptions[index].trackName),
+                                  subtitle: Text(audioOptions[index].size),
                                   minTileHeight: 70,
                                   onTap: () {
                                     setState(() {
@@ -205,6 +224,18 @@ class VideoDownloadBottomSheet {
                                             videoUrl:
                                                 audioOptions[selectedAudioIndex]
                                                     .url,
+                                            videoTitle:
+                                                videoDownloadEntity.videoTitle,
+                                            downloadType: DownloadType.audio,
+                                            audioTag:
+                                                audioOptions[selectedAudioIndex]
+                                                    .audioTag,
+                                            videoId:
+                                                videoDownloadEntity.videoId,
+                                            downloadFormat: Helper.getFormat(
+                                              audioOptions[selectedAudioIndex]
+                                                  .format,
+                                            ),
                                           ),
                                         ),
                                       );

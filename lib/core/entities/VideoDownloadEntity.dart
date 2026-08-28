@@ -5,6 +5,7 @@ class VideoDownloadEntity {
   String thumbnail;
   String views;
   String videoDuration;
+  String videoId;
   final List<VideoDownloadOption> downloadOptions;
 
   VideoDownloadEntity({
@@ -12,6 +13,7 @@ class VideoDownloadEntity {
     required this.thumbnail,
     required this.views,
     required this.videoDuration,
+    required this.videoId,
     required this.downloadOptions,
   });
 }

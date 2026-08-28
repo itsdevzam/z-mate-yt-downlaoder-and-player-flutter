@@ -260,6 +260,8 @@ class _VideoPlayerState extends State<VideoPlayer> {
   void initState() {
     // TODO: implement initState
     super.initState();
+    _isLoading=false;
+    _isLoadingDownload=false;
     getSuggestedVideos();
   }
 

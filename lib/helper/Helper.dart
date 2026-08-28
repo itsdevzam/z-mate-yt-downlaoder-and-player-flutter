@@ -51,6 +51,21 @@ class Helper {
     }
   }
 
+  static String getDownFormat(String url) {
+    if (url.contains('.m3u8')) return 'hls';
+    if (url.contains('.mpd')) return 'dash';
+    return 'mp4';
+  }
+
+  static String sanitizeFileName(String name) {
+    return name
+        .replaceAll(RegExp(r'[<>:"/\\|?*]'), '_')
+        .replaceAll(RegExp(r'\s+'), ' ')
+        .trim();
+  }
+
+
+
   static List<String> homeFeedSearches = [
     "latest trending videos",
     "breaking world news",

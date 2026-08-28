@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:youtube_explode_dart/youtube_explode_dart.dart';
 import 'package:yt_down/core/entities/VideoDownloadOption.dart';
 import 'package:yt_down/core/enum/DownloadStreamType.dart';
@@ -54,10 +56,15 @@ class VideoPlayerRepoImpl implements VideoPlayerRepo {
       element,
     ) {
       final DownloadStreamType streamType = getStreamType(element);
+      final trackName = getTrackName(element);
+      print('Track Name $trackName and URL ${element.url}');
       return VideoDownloadOption(
         quality: element.qualityLabel,
         format: element.codec.toString(),
         url: element.url.toString(),
+        size: element.size.toString(),
+        trackName: trackName,
+        audioTag: element.tag.toString(),
         type: streamType,
       );
     }).toList();
@@ -65,6 +72,7 @@ class VideoPlayerRepoImpl implements VideoPlayerRepo {
       videoTitle: title,
       thumbnail: thumbnail,
       views: views,
+      videoId: videoId,
       videoDuration: videoDuration,
       downloadOptions: downloadOptionsList,
     );
@@ -80,5 +88,13 @@ class VideoPlayerRepoImpl implements VideoPlayerRepo {
     }
 
     throw UnsupportedError('Unsupported stream type: ${element.runtimeType}');
+  }
+
+  String getTrackName(StreamInfo element){
+    if (element is AudioOnlyStreamInfo) {
+      return element.audioTrack?.displayName??'Default';
+    }else{
+      return element.codec.type;
+    }
   }
 }
